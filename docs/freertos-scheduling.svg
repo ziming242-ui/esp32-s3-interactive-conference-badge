@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title description">
+  <title id="title">FreeRTOS task scheduling</title>
+  <desc id="description">Ready tasks are ordered by priority, selected by the FreeRTOS scheduler, and executed on either ESP32-S3 core. Tasks move between ready, running, and blocked states.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .section { font: 700 17px Arial, sans-serif; fill: #475569; letter-spacing: 0.4px; }
+      .label { font: 700 19px Arial, sans-serif; fill: #0f172a; }
+      .detail { font: 15px Arial, sans-serif; fill: #475569; }
+      .priority { font: 700 18px Arial, sans-serif; fill: #1d4ed8; }
+      .box { fill: #ffffff; stroke: #64748b; stroke-width: 2; rx: 6; }
+      .scheduler { fill: #eff6ff; stroke: #2563eb; stroke-width: 2.5; rx: 6; }
+      .state { fill: #f8fafc; stroke: #0f766e; stroke-width: 2.5; rx: 6; }
+      .blocked { fill: #fefce8; stroke: #a16207; stroke-width: 2.5; rx: 6; }
+      .arrow { fill: none; stroke: #334155; stroke-width: 2.5; marker-end: url(#arrow); }
+      .return { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="780" fill="#f8fafc"/>
+  <text class="title" x="600" y="48" text-anchor="middle">FreeRTOS Scheduling</text>
+
+  <text class="section" x="240" y="92" text-anchor="middle">READY TASKS BY PRIORITY</text>
+  <text class="section" x="650" y="92" text-anchor="middle">SCHEDULER</text>
+  <text class="section" x="1010" y="92" text-anchor="middle">ESP32-S3 CPU</text>
+
+  <rect class="box" x="55" y="120" width="370" height="72"/>
+  <text class="priority" x="80" y="153">P7</text>
+  <text class="label" x="145" y="153">infrared</text>
+  <text class="detail" x="145" y="177">Command or 20 ms timeout</text>
+
+  <rect class="box" x="55" y="215" width="370" height="72"/>
+  <text class="priority" x="80" y="248">P6</text>
+  <text class="label" x="145" y="248">badge_app + buzzer</text>
+  <text class="detail" x="145" y="272">Application or buzzer event</text>
+
+  <rect class="box" x="55" y="310" width="370" height="72"/>
+  <text class="priority" x="80" y="343">P5</text>
+  <text class="label" x="145" y="343">buttons</text>
+  <text class="detail" x="145" y="367">5 ms polling delay expires</text>
+
+  <rect class="box" x="55" y="405" width="370" height="72"/>
+  <text class="priority" x="80" y="438">P3</text>
+  <text class="label" x="145" y="438">oled</text>
+  <text class="detail" x="145" y="462">250 ms refresh delay expires</text>
+
+  <rect class="scheduler" x="515" y="220" width="270" height="150"/>
+  <text class="label" x="650" y="266" text-anchor="middle">FreeRTOS Scheduler</text>
+  <text class="detail" x="650" y="298" text-anchor="middle">Selects the highest-priority</text>
+  <text class="detail" x="650" y="322" text-anchor="middle">task in the READY state</text>
+  <text class="detail" x="650" y="348" text-anchor="middle">Preemptive, 1 ms tick</text>
+
+  <rect class="box" x="900" y="185" width="220" height="88"/>
+  <text class="label" x="1010" y="224" text-anchor="middle">CPU Core 0</text>
+  <text class="detail" x="1010" y="250" text-anchor="middle">Runs a selected task</text>
+
+  <rect class="box" x="900" y="325" width="220" height="88"/>
+  <text class="label" x="1010" y="364" text-anchor="middle">CPU Core 1</text>
+  <text class="detail" x="1010" y="390" text-anchor="middle">Runs a selected task</text>
+
+  <path class="arrow" d="M 425 156 H 470 V 252 H 515"/>
+  <path class="arrow" d="M 425 251 H 515"/>
+  <path class="arrow" d="M 425 346 H 470 V 308 H 515"/>
+  <path class="arrow" d="M 425 441 H 490 V 344 H 515"/>
+  <path class="arrow" d="M 785 270 H 840 V 229 H 900"/>
+  <path class="arrow" d="M 785 320 H 840 V 369 H 900"/>
+
+  <text class="section" x="600" y="545" text-anchor="middle">TASK STATE FLOW</text>
+
+  <rect class="state" x="105" y="590" width="240" height="86"/>
+  <text class="label" x="225" y="627" text-anchor="middle">READY</text>
+  <text class="detail" x="225" y="653" text-anchor="middle">Eligible for CPU time</text>
+
+  <rect class="scheduler" x="480" y="590" width="240" height="86"/>
+  <text class="label" x="600" y="627" text-anchor="middle">RUNNING</text>
+  <text class="detail" x="600" y="653" text-anchor="middle">Executing on a core</text>
+
+  <rect class="blocked" x="855" y="590" width="240" height="86"/>
+  <text class="label" x="975" y="627" text-anchor="middle">BLOCKED</text>
+  <text class="detail" x="975" y="653" text-anchor="middle">Waiting without using CPU</text>
+
+  <path class="arrow" d="M 345 633 H 480"/>
+  <text class="detail" x="412" y="616" text-anchor="middle">scheduled</text>
+  <path class="arrow" d="M 720 633 H 855"/>
+  <text class="detail" x="787" y="607" text-anchor="middle">queue wait</text>
+  <text class="detail" x="787" y="627" text-anchor="middle">or delay</text>
+  <path class="return" d="M 975 676 V 726 H 225 V 676"/>
+  <text class="detail" x="600" y="748" text-anchor="middle">event or timeout makes the task READY again</text>
+</svg>
