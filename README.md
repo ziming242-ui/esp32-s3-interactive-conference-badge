@@ -92,7 +92,7 @@ app_main()
 - `src/badge_app.c`: creates the event queue and coordinates all modules.
 - `src/badge_contacts.c`: stores up to 64 encountered IDs.
 - `src/badge_directory.c`: resolves IDs to attendee profiles.
-- `src/badge_diagnostics.c`: records queue, stack, and protocol evidence.
+- `src/badge_diagnostics.c`: records queue, stack, and protocol diagnostics.
 - `src/badge_hardware_info.c`: reports the detected N16R8 memory configuration.
 - `src/badge_state.c`: protects OLED-visible state with a mutex.
 - `src/modules/infrared.c`: sends, receives, and validates ID frames.
@@ -135,7 +135,7 @@ Verified on prototype hardware:
   validation, directory resolution, contact storage, and OLED display.
 - Firmware build with ESP-IDF 6.0.1, with queue-drop and task-stack diagnostics.
 
-Evidence boundary:
+Known limits:
 
 - Optical range, current consumption, and battery runtime were not measured.
 - Two-badge communication was not tested; the optical loopback validates the
